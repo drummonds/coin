@@ -535,8 +535,9 @@ export const Aggregation = {
 
 // UI State
 export const State = {
+  // All these need to be set again after loadEverything() is called
   SelectedAccount: Accounts.Assets,
-  SelectedView: "must be set first",
+  SelectedView: "Register",
   StartDate: MinDate,
   EndDate: MaxDate,
   View: {

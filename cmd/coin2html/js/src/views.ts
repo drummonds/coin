@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import {
   Account,
+  Accounts,
   Aggregation,
   Amount,
   dateToString,
@@ -14,9 +15,6 @@ import {
   State,
   trimToDateRange,
 } from "./models";
-
-// Need to load before initializing the UI state below.
-loadEverything();
 
 // View types by account category.
 // All types have Register.
@@ -53,7 +51,6 @@ const Views = {
 };
 
 // UI State
-State.SelectedView = Object.keys(Views.Assets)[0];
 
 // VIEWS
 
@@ -611,6 +608,13 @@ function updateAccounts() {
 }
 
 function initializeUI() {
+  // Need to load before initializing the UI state.
+  loadEverything();
+  State.SelectedAccount = Accounts.Assets;
+  State.SelectedView = Object.keys(Views.Assets)[0];
+  State.StartDate = MinDate;
+  State.EndDate = MaxDate;
+
   const minDate = dateToString(new Date(MinDate.getFullYear(), 1, 1));
   const maxDate = dateToString(new Date(MaxDate.getFullYear() + 1, 1, 1));
   d3.select(EndDateInput)
